@@ -10,6 +10,8 @@ g++ -o BankAl BankAl.cpp
 ./BankAl
 ```
 
+El programa prueba con cada estado de prueba y el usuario puede verificar si es seguro y simular que un hilo solicite recursos.
+
 ## Sobre el algoritmo
 
 - **Available**: Vector que indica cuántos recursos de cada tipo están disponibles en el sistema.
