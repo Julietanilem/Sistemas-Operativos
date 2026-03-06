@@ -2,7 +2,7 @@
 #include <vector>
 using namespace std;
 
- 
+
 int n = 5; //  Number of processes (T0, T1, T2, T3, T4)
 int r = 4; //  Number of resources (A,B,C,D)
 
@@ -15,6 +15,7 @@ bool checkSafeState(vector<bool> Finish){
 }
 
 bool lessEqual(vector<int> a, vector<int> b){
+    // Let a and b be vectors of lenght n. We say that a<=b if and only if a[i]<=b[i] for all i = 1, 2, ..., n.
     for(int i = 0; i < r; i++){
         if(a[i] > b[i]) return false;
     }
@@ -72,12 +73,13 @@ bool resourceRequest(int thread, vector<int>& request, vector<int>& Available,
         return false;
     }
 
-    // Hace the system pretend to have allocated the requested resources to thread Ti by modifing the state as follows:
+    // Make the system pretend to have allocated the requested resources to thread Ti by modifing the state as follows:
     // Available = Available - Request;
     for (int j = 0; j < r; j++) Available[j] -= request[j];
 
     // Allocation[i] = Allocation[i] + Request;
     for (int j = 0; j < r; j++) Allocation[thread][j] += request[j];
+
     // Need[i] = Need[i] - Request;
     for (int j = 0; j < r; j++) Need[thread][j] -= request[j];
 
@@ -122,9 +124,11 @@ void cli(vector<int> Available, vector<vector<int>>& Allocation,
             int thread;
             cout << "Thread (0-" << n-1 << "): "; 
             cin >> thread;
+
             // Let Request be the request vector for thread T_i
             vector<int> Request(r);
             cout << "Request (" << r << " values): ";
+
             // The thread wants Request[j] instances of resource type j
             for (int j = 0; j < r; j++) 
                 cin >> Request[j];
@@ -167,7 +171,7 @@ int main() {
     }
 
 
-    // Testing fordifferent Available sequence:
+    // Testing for different Available sequences:
     vector<vector<int>> testCases = {
         {2, 2, 2, 3},
         {4, 4, 1, 1},
