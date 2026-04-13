@@ -1,0 +1,29 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main() {
+    char src[100], dst[100], cmd[205] = "cp ";
+
+
+    printf("Please enter name of source file: ");
+    fgets(src, sizeof(src), stdin);
+    src[strcspn(src, "\n")] = 0;
+
+    strcat(cmd, src);
+    strcat(cmd, " ");
+
+    printf("Please enter name of destination file: ");
+    fgets(dst, sizeof(dst), stdin);
+    dst[strcspn(dst, "\n")] = 0;
+
+    strcat(cmd, dst);
+
+    printf("Executing command: %s\n", cmd);
+
+    system(cmd); // Vulnerable a inyección de comandos
+
+    return 0;
+
+
+}
